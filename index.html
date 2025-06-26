@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Questionário de Perfil</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FDFDFB;
+            color: #1C3553;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .topo {
+            background-color: #EADCA6;
+            padding: 10px 0;
+        }
+        .topo .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            height: 40px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+            flex: 1;
+        }
+        h2 {
+            color: #1C3553;
+        }
+        .pergunta {
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-top: 8px;
+            cursor: pointer;
+        }
+        button {
+            padding: 12px 25px;
+            background-color: #EADCA6;
+            border: none;
+            color: #1C3553;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #d8c78c;
+        }
+        footer {
+            background-color: #EADCA6;
+            text-align: center;
+            padding: 15px;
+            font-size: 14px;
+            color: #1C3553;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="topo">
+        <div class="container">
+            <div class="logo">
+                <!-- Substitua aqui pela sua logo real -->
+                <img src="img/logo.png" alt="Logo">
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Questionário de Perfil</h2>
+
+        <form action="processa.php" method="POST">
+
+            <div class="pergunta">
+                <p>1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget suscipit nulla, in fermentum urna. Aliquam erat volutpat?</p>
+                <label><input type="radio" name="q1" value="2" required> a) Alternativa A</label>
+                <label><input type="radio" name="q1" value="1"> b) Alternativa B</label>
+                <label><input type="radio" name="q1" value="0"> c) Alternativa C</label>
+            </div>
+
+            <div class="pergunta">
+                <p>2. Integer commodo ex in ipsum tristique, nec vulputate odio lacinia. Praesent ac felis eget arcu convallis cursus a id mauris?</p>
+                <label><input type="radio" name="q2" value="2" required> a) Alternativa A</label>
+                <label><input type="radio" name="q2" value="1"> b) Alternativa B</label>
+                <label><input type="radio" name="q2" value="0"> c) Alternativa C</label>
+            </div>
+
+            <div class="pergunta">
+                <p>3. Quisque ut augue a enim facilisis iaculis. Fusce sed velit ut nunc pulvinar malesuada. Nullam ut odio eu nisl placerat egestas?</p>
+                <label><input type="radio" name="q3" value="2" required> a) Alternativa A</label>
+                <label><input type="radio" name="q3" value="1"> b) Alternativa B</label>
+                <label><input type="radio" name="q3" value="0"> c) Alternativa C</label>
+            </div>
+
+            <button type="submit">Enviar Respostas</button>
+
+        </form>
+    </div>
+
+    <footer>
+        © 2025 Sua Empresa - Todos os direitos reservados.
+    </footer>
+
+</body>
+</html>
