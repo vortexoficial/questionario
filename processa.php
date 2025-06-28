@@ -1,196 +1,194 @@
-<?php
-function somarRespostas($inicio, $fim) {
-    $soma = 0;
-    for ($i = $inicio; $i <= $fim; $i++) {
-        $key = 'q' . $i;
-        if (isset($_POST[$key])) {
-            $soma += intval($_POST[$key]);
-        }
-    }
-    return $soma;
-}
-
-$nome = $_POST['nome'] ?? 'Não informado';
-$whatsapp = $_POST['whatsapp'] ?? 'Não informado';
-
-$pontos_cerebro = somarRespostas(1, 14);
-$pontos_coracao = somarRespostas(15, 27);
-$pontos_pulmao  = somarRespostas(28, 39);
-$pontos_sangue  = somarRespostas(40, 52);
-
-$total_geral = $pontos_cerebro + $pontos_coracao + $pontos_pulmao + $pontos_sangue;
-
-function diagnosticoBloco($pontos, $maximo) {
-    if ($pontos >= $maximo * 0.8) return "🟢 Saudável";
-    if ($pontos >= $maximo * 0.5) return "🟡 Em alerta";
-    return "🔴 Crítico";
-}
-
-$diag_cerebro = diagnosticoBloco($pontos_cerebro, 28);
-$diag_coracao = diagnosticoBloco($pontos_coracao, 26);
-$diag_pulmao  = diagnosticoBloco($pontos_pulmao, 24);
-$diag_sangue  = diagnosticoBloco($pontos_sangue, 26);
-
-if ($total_geral >= 85) {
-    $resultado_geral = "🟢 Empresa no controle";
-    $mensagem_final = "Obrigado por preencher o Check-up Empresarial.\n\nSua empresa está no controle, ótimo sinal. Agora é o momento certo para acelerar resultados e evoluir com ainda mais estratégia.\n\nEm breve, entraremos em contato com um plano de mentoria e consultoria personalizado.\n\n💡 Negócios fortes não esperam o problema chegar, evoluem com intenção e ritmo acelerado.";
-} elseif ($total_geral >= 50) {
-    $resultado_geral = "🟡 Empresa em alerta";
-    $mensagem_final = "Obrigado por preencher o Check-up Empresarial.\n\nSua empresa está em alerta, há pontos que precisam de atenção antes que se tornem críticos.\n\nEm breve, entraremos em contato com um plano de mentoria e consultoria ajustado à sua realidade.\n\n💡 Este é o momento certo para agir e reverter o cenário.";
-} else {
-    $resultado_geral = "🔴 Empresa em colapso";
-    $mensagem_final = "Obrigado por preencher o Check-up Empresarial.\n\nO diagnóstico mostra que a sua empresa precisa de intervenção urgente, mas também revela uma oportunidade de virar o jogo.\n\nVamos entrar em contato com um plano de mentoria e consultoria focado na recuperação.\n\n💡 Quanto mais rápido agir, maiores as chances de retomar o rumo com segurança.";
-}
-
-// Deixa a frase com 💡 em negrito
-$mensagem_formatada = preg_replace('/(💡.*)/', '<strong>$1</strong>', nl2br($mensagem_final));
-
-// Envio por e-mail
-$destinatario = "inleandrodesign@gmail.com";
-$assunto = "Nova resposta do Check-up Empresarial Profundo";
-
-$mensagem = "Nome: $nome\n";
-$mensagem .= "WhatsApp: $whatsapp\n\n";
-$mensagem .= "Pontuação por bloco:\n";
-$mensagem .= "🧠 CÉREBRO: $pontos_cerebro – $diag_cerebro\n";
-$mensagem .= "❤️ CORAÇÃO: $pontos_coracao – $diag_coracao\n";
-$mensagem .= "💨 PULMÃO: $pontos_pulmao – $diag_pulmao\n";
-$mensagem .= "🩸 SANGUE: $pontos_sangue – $diag_sangue\n\n";
-$mensagem .= "TOTAL: $total_geral pontos\n";
-$mensagem .= "Diagnóstico Final: $resultado_geral\n\n";
-$mensagem .= "Mensagem Final:\n$mensagem_final";
-
-$headers = "From: no-reply@seudominio.com";
-mail($destinatario, $assunto, $mensagem, $headers);
-?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Resultado do Check-up Empresarial</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #FDFDFB;
-            color: #1C3553;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- ESSENCIAL -->
+  <title>Resultado do Check-up Empresarial</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #FDFDFB;
+      color: #1C3553;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+    }
 
-        .conteudo {
-            background-color: white;
-            border: 1px solid #eee;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.05);
-            max-width: 600px;
-            width: 90%;
-        }
+    .conteudo {
+      background-color: white;
+      border: 1px solid #eee;
+      padding: 0;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.05);
+      max-width: 600px;
+      width: 90%;
+      overflow: hidden;
+    }
 
-        .logo img {
-            height: 120px;
-            margin-bottom: 25px;
-        }
+    .header-logo {
+      background-color: #1A1A1A;
+      padding: 10px 5px;
+    }
 
-        h1 {
-            background-color: #EADCA6;
-            padding: 15px;
-            border-radius: 8px;
-            font-size: 22px;
-        }
+    .header-logo img {
+      height: 100px;
+    }
 
-        .resultado-geral {
-            font-size: 1.6em;
-            font-weight: bold;
-            margin: 25px 0 10px;
-        }
+    h1 {
+      background-color: #d8b93f;
+      padding: 15px;
+      border-radius: 0;
+      font-size: 22px;
+      margin: 0;
+      color: #000;
+    }
 
-        .mensagem {
-            color: #555;
-            font-size: 15px;
-            margin-bottom: 25px;
-            white-space: pre-wrap;
-            text-align: center;
-        }
+    h2 {
+      color: #000;
+    }
 
-        .blocos {
-            margin-top: 20px;
-        }
+    .resultado-geral {
+      font-size: 1.6em;
+      font-weight: bold;
+      margin: 20px 0 10px;
+      color: #000;
+    }
 
-        .blocos p {
-            margin: 8px 0;
-            font-size: 16px;
-        }
+    .mensagem {
+      color: #555;
+      font-size: 19px;
+      margin: 20px;
+      white-space: pre-wrap;
+    }
 
-        .pontuacao-total {
-            font-size: 20px;
-            font-weight: bold;
-            margin-top: 25px;
-            color: #1C3553;
-        }
+    .mensagem-contato {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background-color: #fff;
+      padding: 15px;
+      margin: 20px;
+      font-size: 19px;
+      color: #555;
+    }
 
-        /* MEDIA QUERY PARA MOBILE */
-        @media (max-width: 600px) {
-            .conteudo {
-                padding: 30px;
-            }
+    .mensagem strong {
+      display: inline-block;
+      margin-top: 10px;
+    }
 
-            .logo img {
-                height: 140px;
-            }
+    .blocos {
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 12px;
+      background-color: #1A1A1A;
+      color: white;
+      max-width: 90%;
+      text-align: center;
+    }
 
-            h1 {
-                font-size: 24px;
-            }
+    .blocos p {
+      margin: 12px 0;
+      font-size: 16px;
+    }
 
-            .resultado-geral {
-                font-size: 1.8em;
-            }
+    .pontuacao-total {
+      font-size: 19px;
+      font-weight: bold;
+      color: #d8b93f;
+      text-align: center;
+      margin-top: 20px;
+    }
 
-            .mensagem {
-                font-size: 17px;
-            }
+    /* 📱 MEDIA QUERY PARA MOBILE (agora com aumento real de tamanho) */
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
 
-            .blocos p {
-                font-size: 18px;
-            }
+      .conteudo {
+        width: 98%;
+      }
 
-            .pontuacao-total {
-                font-size: 22px;
-            }
-        }
-    </style>
+      .header-logo img {
+        height: 100px;
+      }
+
+      h1 {
+        font-size: 24px;
+        padding: 20px 10px;
+      }
+
+      .resultado-geral {
+        font-size: 22px;
+      }
+
+      .mensagem {
+        font-size: 18px;
+        margin: 0px 0px;
+        
+      }
+
+      .mensagem-contato {
+        font-size: 17px;
+        padding: 18px;
+        margin: 25px auto;
+        width: 80%;
+      }
+
+      .mensagem strong {
+        font-size: 17px;
+      }
+
+      .blocos {
+        padding: 25px 20px;
+      }
+
+      .blocos p {
+        font-size: 14px;
+        margin: 12px 0;
+      }
+
+      .pontuacao-total {
+        font-size: 20px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="conteudo">
-        <div class="logo">
-            <img src="img/logo.png" alt="Logo">
-        </div>
-
-        <h1>Resultado do Check-up Empresarial</h1>
-
-        <div class="resultado-geral"><?php echo $resultado_geral; ?></div>
-
-        <div class="mensagem">
-            <?php echo $mensagem_formatada; ?>
-        </div>
-
-        <div class="blocos">
-            <p><strong>🧠 CÉREBRO:</strong> <?php echo "$pontos_cerebro pontos – $diag_cerebro"; ?></p>
-            <p><strong>❤️ CORAÇÃO:</strong> <?php echo "$pontos_coracao pontos – $diag_coracao"; ?></p>
-            <p><strong>💨 PULMÃO:</strong> <?php echo "$pontos_pulmao pontos – $diag_pulmao"; ?></p>
-            <p><strong>🩸 SANGUE:</strong> <?php echo "$pontos_sangue pontos – $diag_sangue"; ?></p>
-        </div>
-
-        <div class="pontuacao-total">
-            Total Geral: <?php echo "$total_geral pontos"; ?>
-        </div>
+  <div class="conteudo">
+    <div class="header-logo">
+      <img src="img/logo.png" alt="Logo">
     </div>
+
+    <h1>Resultado do Check-up Empresarial</h1>
+
+    <div class="resultado-geral">🟡 Empresa em alerta</div>
+
+    <div class="mensagem">
+      Obrigado por preencher o Check-up Empresarial.
+    </div>
+
+    <div class="mensagem-contato">
+      Sua empresa está em alerta, há pontos que precisam de atenção antes que se tornem críticos.
+<br><br>
+      Em breve, entraremos em contato com um plano de mentoria e consultoria ajustado à sua realidade.
+    </div>
+
+    <div class="mensagem">
+      <strong>💡<br>Este é o momento certo para agir e reverter o cenário.</strong>
+    </div>
+
+    <div class="blocos">
+      <p><strong>🧠 CÉREBRO:</strong> 14 pontos – 🟡 Em alerta</p>
+      <p><strong>❤️ CORAÇÃO:</strong> 22 pontos – 🟢 Saudável</p>
+      <p><strong>💨 PULMÃO:</strong> 24 pontos – 🟢 Saudável</p>
+      <p><strong>🩸 SANGUE:</strong> 16 pontos – 🟡 Em alerta</p>
+      <div class="pontuacao-total">Total Geral: 76 pontos</div>
+    </div>
+  </div>
 </body>
 </html>
