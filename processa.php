@@ -1,194 +1,256 @@
+<?php
+$nome = $_POST['nome'];
+$whatsapp = $_POST['whatsapp'];
+
+$total_geral = 0;
+$blocos = ["cerebro" => 0, "coracao" => 0, "pulmao" => 0, "sangue" => 0];
+
+$faixas = [
+    "cerebro" => range(1, 14),
+    "coracao" => range(15, 26),
+    "pulmao" => range(27, 38),
+    "sangue" => range(39, 52)
+];
+
+foreach ($_POST as $key => $value) {
+    if (preg_match('/^q(\d+)$/', $key, $matches)) {
+        $num = intval($matches[1]);
+        $pontos = intval($value);
+        $total_geral += $pontos;
+
+        foreach ($faixas as $bloco => $perguntas) {
+            if (in_array($num, $perguntas)) {
+                $blocos[$bloco] += $pontos;
+            }
+        }
+    }
+}
+
+function diagnostico($pontos, $max) {
+    $percentual = ($pontos / $max) * 100;
+    if ($percentual >= 70) return ["Saudável", "🟢"];
+    if ($percentual >= 40) return ["Em alerta", "🟡"];
+    return ["Crítico", "🔴"];
+}
+
+$maximos = ["cerebro" => 28, "coracao" => 24, "pulmao" => 24, "sangue" => 28];
+$diagnosticos = [];
+foreach ($blocos as $bloco => $pontos) {
+    list($status, $icone) = diagnostico($pontos, $maximos[$bloco]);
+    $diagnosticos[$bloco] = ["pontos" => $pontos, "status" => $status, "icone" => $icone];
+}
+
+// Status e mensagens por pontuação total
+if ($total_geral >= 104) {
+    $status_geral = ["Empresa no Controle", "🟢"];
+    $mensagem_geral = "Sua empresa está no controle, ótimo sinal.<br><br>Agora é o momento certo para acelerar resultados e evoluir com ainda mais estratégia.<br><br>Em breve, entraremos em contato com um plano de mentoria e consultoria personalizado.";
+    $frase_final = "💡<br>Negócios fortes não esperam o problema chegar, evoluem com intenção e ritmo acelerado.";
+} elseif ($total_geral >= 70) {
+    $status_geral = ["Empresa em Alerta", "🟡"];
+    $mensagem_geral = "Sua empresa está em alerta, há pontos que precisam de atenção antes que se tornem críticos.<br><br>Em breve, entraremos em contato com um plano de mentoria e consultoria ajustado à sua realidade.";
+    $frase_final = "💡<br>Este é o momento certo para agir e reverter o cenário.";
+} else {
+    $status_geral = ["Empresa em Nível Crítico", "🔴"];
+    $mensagem_geral = "O diagnóstico mostra que a sua empresa precisa de intervenção urgente, mas também revela uma oportunidade de virar o jogo.<br><br>Vamos entrar em contato com um plano de mentoria e consultoria focado na recuperação.";
+    $frase_final = "<font💡<br>Quanto mais rápido agir, maiores as chances de retomar o rumo com segurança.";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- ESSENCIAL -->
-  <title>Resultado do Check-up Empresarial</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Arial', sans-serif;
-      background-color: #FDFDFB;
-      color: #1C3553;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      text-align: center;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado do Check-up Empresarial</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fdfdfb;
+            color: #000000;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 650px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 0;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
 
-    .conteudo {
-      background-color: white;
-      border: 1px solid #eee;
-      padding: 0;
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.05);
-      max-width: 600px;
-      width: 90%;
-      overflow: hidden;
-    }
+        .topo {
+            background-color: #1a1a1a;
+            padding: 10px 0;
+        }
 
-    .header-logo {
-      background-color: #1A1A1A;
-      padding: 10px 5px;
-    }
+        .topo img {
+            height: 80px;
+        }
 
-    .header-logo img {
-      height: 100px;
-    }
+        .titulo-header {
+            background-color: #D4AF37;
+            padding: 15px;
+            font-weight: bold;
+            font-size: 20px;
+            color: #1c3553;
+        }
 
-    h1 {
-      background-color: #d8b93f;
-      padding: 15px;
-      border-radius: 0;
-      font-size: 22px;
-      margin: 0;
-      color: #000;
-    }
+        .status-geral {
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1c3553;
+        }
 
-    h2 {
-      color: #000;
-    }
+        .status-geral span {
+            margin-right: 10px;
+        }
 
-    .resultado-geral {
-      font-size: 1.6em;
-      font-weight: bold;
-      margin: 20px 0 10px;
-      color: #000;
-    }
+        .mensagem {
+            margin: 20px 30px;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #000000;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
 
-    .mensagem {
-      color: #555;
-      font-size: 19px;
-      margin: 20px;
-      white-space: pre-wrap;
-    }
+        .box-diagnostico {
+            background: #1f1f1f;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 30px;
+            border-radius: 10px;
+        }
 
-    .mensagem-contato {
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      background-color: #fff;
-      padding: 15px;
-      margin: 20px;
-      font-size: 19px;
-      color: #555;
-    }
+        .box-diagnostico ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 0 auto;
+            display: inline-block;
+            text-align: left;
+        }
 
-    .mensagem strong {
-      display: inline-block;
-      margin-top: 10px;
-    }
+        .box-diagnostico li {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
 
-    .blocos {
-      margin: 20px auto;
-      padding: 20px;
-      border-radius: 12px;
-      background-color: #1A1A1A;
-      color: white;
-      max-width: 90%;
-      text-align: center;
-    }
+        .total {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 15px;
+            color: #EAD84B;
+        }
 
-    .blocos p {
-      margin: 12px 0;
-      font-size: 16px;
-    }
+        p {
+            font-size: 16px;
+            color: #000000;
+        }
 
-    .pontuacao-total {
-      font-size: 19px;
-      font-weight: bold;
-      color: #d8b93f;
-      text-align: center;
-      margin-top: 20px;
-    }
+        .frase-final {
+            margin: 30px 30px 40px;
+            font-weight: bold;
+            font-size: 16px;
+            color: #000000;
+        }
 
-    /* 📱 MEDIA QUERY PARA MOBILE (agora com aumento real de tamanho) */
-    @media (max-width: 600px) {
-      body {
-        padding: 10px;
-      }
+        .espacamento-footer {
+            height: 30px;
+        }
 
-      .conteudo {
-        width: 98%;
-      }
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+                margin: 20px auto;
+                box-shadow: none;
+                border-radius: 10px;
+            }
 
-      .header-logo img {
-        height: 100px;
-      }
+            .topo img {
+                height: 60px;
+            }
 
-      h1 {
-        font-size: 24px;
-        padding: 20px 10px;
-      }
+            .titulo-header {
+                font-size: 18px;
+                padding: 12px;
+            }
 
-      .resultado-geral {
-        font-size: 22px;
-      }
+            .status-geral {
+                font-size: 18px;
+                margin-top: 15px;
+                flex-direction: row;
+                justify-content: center;
+            }
 
-      .mensagem {
-        font-size: 18px;
-        margin: 0px 0px;
-        
-      }
+            .mensagem, .frase-final {
+                margin: 15px 20px;
+                font-size: 15px;
+            }
 
-      .mensagem-contato {
-        font-size: 17px;
-        padding: 18px;
-        margin: 25px auto;
-        width: 80%;
-      }
+            .box-diagnostico {
+                margin: 15px 20px;
+                padding: 15px;
+            }
 
-      .mensagem strong {
-        font-size: 17px;
-      }
+            .box-diagnostico li {
+                font-size: 15px;
+                margin-bottom: 8px;
+            }
 
-      .blocos {
-        padding: 25px 20px;
-      }
+            .total {
+                font-size: 16px;
+                text-align: center;
+            }
 
-      .blocos p {
-        font-size: 14px;
-        margin: 12px 0;
-      }
-
-      .pontuacao-total {
-        font-size: 20px;
-      }
-    }
-  </style>
+            p {
+                font-size: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="conteudo">
-    <div class="header-logo">
-      <img src="img/logo.png" alt="Logo">
+
+<div class="container">
+    <div class="topo">
+        <img src="img/logo.png" alt="Logo">
     </div>
 
-    <h1>Resultado do Check-up Empresarial</h1>
+    <div class="titulo-header">Resultado do Check-up Empresarial</div>
 
-    <div class="resultado-geral">🟡 Empresa em alerta</div>
+    <div class="status-geral">
+        <span><?= $status_geral[1] ?></span> <span><?= $status_geral[0] ?></span>
+    </div>
+
+    <p>Obrigado por preencher o Check-up Empresarial.</p>
 
     <div class="mensagem">
-      Obrigado por preencher o Check-up Empresarial.
+        <p><?= $mensagem_geral ?></p>
     </div>
 
-    <div class="mensagem-contato">
-      Sua empresa está em alerta, há pontos que precisam de atenção antes que se tornem críticos.
-<br><br>
-      Em breve, entraremos em contato com um plano de mentoria e consultoria ajustado à sua realidade.
+    <div class="box-diagnostico">
+        <ul>
+            <li>🧠 <strong>CÉREBRO:</strong> <?= $diagnosticos['cerebro']['pontos'] ?> pontos – <?= $diagnosticos['cerebro']['icone'] ?> <?= $diagnosticos['cerebro']['status'] ?></li>
+            <li>❤️ <strong>CORAÇÃO:</strong> <?= $diagnosticos['coracao']['pontos'] ?> pontos – <?= $diagnosticos['coracao']['icone'] ?> <?= $diagnosticos['coracao']['status'] ?></li>
+            <li>💨 <strong>PULMÃO:</strong> <?= $diagnosticos['pulmao']['pontos'] ?> pontos – <?= $diagnosticos['pulmao']['icone'] ?> <?= $diagnosticos['pulmao']['status'] ?></li>
+            <li>🩸 <strong>SANGUE:</strong> <?= $diagnosticos['sangue']['pontos'] ?> pontos – <?= $diagnosticos['sangue']['icone'] ?> <?= $diagnosticos['sangue']['status'] ?></li>
+        </ul>
+        <div class="total">Total Geral: <?= $total_geral ?> pontos</div>
     </div>
 
-    <div class="mensagem">
-      <strong>💡<br>Este é o momento certo para agir e reverter o cenário.</strong>
-    </div>
+    <div class="frase-final"><?= $frase_final ?></div>
 
-    <div class="blocos">
-      <p><strong>🧠 CÉREBRO:</strong> 14 pontos – 🟡 Em alerta</p>
-      <p><strong>❤️ CORAÇÃO:</strong> 22 pontos – 🟢 Saudável</p>
-      <p><strong>💨 PULMÃO:</strong> 24 pontos – 🟢 Saudável</p>
-      <p><strong>🩸 SANGUE:</strong> 16 pontos – 🟡 Em alerta</p>
-      <div class="pontuacao-total">Total Geral: 76 pontos</div>
-    </div>
-  </div>
+    <div class="espacamento-footer"></div>
+</div>
+
 </body>
 </html>
