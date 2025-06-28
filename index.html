@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <title>Questionário de Perfil</title>
+    <title>Check-up Empresarial Profundo</title>
     <style>
+        *,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
         body {
             font-family: Arial, sans-serif;
             background-color: #FDFDFB;
@@ -14,7 +21,7 @@
             min-height: 100vh;
         }
         .topo {
-            background-color: #EADCA6;
+            background-color: #1a1a1a;
             padding: 10px 0;
         }
         .topo .container {
@@ -25,25 +32,37 @@
             align-items: center;
         }
         .logo img {
-            height: 40px;
-        }
+    height: 100px; 
+}
         .container {
             max-width: 800px;
             margin: 40px auto;
             padding: 0 20px;
             flex: 1;
         }
-        h2 {
+
+        
+        h2, h3 {
             color: #1C3553;
         }
         .pergunta {
-            margin-bottom: 30px;
-            text-align: left;
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #fff;
         }
         label {
             display: block;
             margin-top: 8px;
             cursor: pointer;
+        }
+        input[type="text"], input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
         button {
             padding: 12px 25px;
@@ -64,6 +83,184 @@
             font-size: 14px;
             color: #1C3553;
         }
+        .bloco-titulo {
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+        .pergunta p {
+    font-weight: bold;
+        }
+        button {
+    border-radius: 12px;
+}
+button {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    background-color: #EADCA6;
+    color: #1C3553;
+    font-weight: bold;
+    padding: 12px 25px;
+    border: none;
+    cursor: pointer;
+}
+
+button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 50px;
+    height: 100%;
+    background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-20deg);
+    animation: shine 2.5s linear infinite;
+}
+
+@keyframes shine {
+    from {
+        left: 100%;
+    }
+    to {
+        left: -50px;
+    }
+}
+
+
+
+        @media (max-width: 600px)
+        
+        {
+    .logo img {
+        height: 100px; /* antes 35px */
+    }
+}
+        
+        
+        {
+    body 
+     {
+        font-size: 16px;
+        padding: 0px;
+    }
+    
+
+    .topo .container,
+    .container {
+        padding: 0 10px;
+        margin: 20px auto;
+    }
+
+    .topo .container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .logo img {
+        height: 35px;
+    }
+
+    h2 {
+        font-size: 20px;
+        text-align: left;
+    }
+
+    h3.bloco-titulo {
+        font-size: 18px;
+        text-align: left;
+    }
+
+    .pergunta {
+        padding: 15px;
+    }
+
+    label {
+        font-size: 15px;
+    }
+
+    input[type="text"], input[type="tel"] {
+        font-size: 16px;
+    }
+
+    button {
+        width: 100%;
+        padding: 14px;
+        font-size: 16px;
+    }
+
+    footer {
+        font-size: 13px;
+        padding: 10px;
+    }
+}
+.box-diagnostico {
+  position: relative;
+  padding: 25px;
+  background-color: #1f1f1f;
+  color: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 40px 0;
+  z-index: 1;
+}
+
+.box-diagnostico .conteudo-box {
+  position: relative;
+  z-index: 2;
+}
+
+.box-diagnostico ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 10px;
+}
+.box-diagnostico li {
+  margin: 5px 0;
+  font-weight: bold;
+}
+
+/* Animação da cobrinha dourada contornando */
+.borda-animada {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.borda-animada::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  box-sizing: border-box;
+  border: 2px solid transparent;
+  background: 
+    linear-gradient(#000, #000) padding-box, 
+    linear-gradient(90deg, transparent 0%, #FFD700 50%, transparent 100%) border-box;
+  mask: 
+    linear-gradient(#fff 0 0) padding-box, 
+    linear-gradient(#fff 0 0) border-box;
+  mask-composite: exclude;
+  animation: borderAnimation 2s linear infinite;
+}
+
+@keyframes borderAnimation {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 400% 0%;
+  }
+}
+
+
     </style>
 </head>
 <body>
@@ -71,46 +268,519 @@
     <div class="topo">
         <div class="container">
             <div class="logo">
-                <!-- Substitua aqui pela sua logo real -->
                 <img src="img/logo.png" alt="Logo">
             </div>
         </div>
     </div>
 
     <div class="container">
-        <h2>Questionário de Perfil</h2>
+        <h2>📋 Check-up Empresarial Profundo</h2>
+
+<div class="descricao-checkup">
+   <div class="box-diagnostico">
+  <span class="borda-animada"></span>
+  <div class="conteudo-box">
+    <p>Um diagnóstico <strong>rápido</strong> e <strong>estratégico</strong> para avaliar os <strong>4 órgãos vitais da sua empresa:</strong></p>
+    <ul>
+      <li>🧠 Liderança e Direção</li>
+      <li>❤️ Equipe, Clima e Cultura</li>
+      <li>💨 Finanças e Sustentação</li>
+      <li>🩸 Processos, Comunicação e Sistemas</li>
+    </ul>
+  </div>
+</div>
+<spam>Com apenas 52 perguntas, você obtém em poucos minutos um diagnóstico claro e prático sobre a saúde do seu negócio. <br><h4>
+Dê o primeiro passo agora, sua empresa agradece!</h4></spam><br>
+</div>
 
         <form action="processa.php" method="POST">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
 
-            <div class="pergunta">
-                <p>1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget suscipit nulla, in fermentum urna. Aliquam erat volutpat?</p>
-                <label><input type="radio" name="q1" value="2" required> a) Alternativa A</label>
-                <label><input type="radio" name="q1" value="1"> b) Alternativa B</label>
-                <label><input type="radio" name="q1" value="0"> c) Alternativa C</label>
-            </div>
+            <label for="whatsapp">WhatsApp:</label>
+            <input type="tel" id="whatsapp" name="whatsapp" placeholder="(XX) XXXXX-XXXX" required>
 
-            <div class="pergunta">
-                <p>2. Integer commodo ex in ipsum tristique, nec vulputate odio lacinia. Praesent ac felis eget arcu convallis cursus a id mauris?</p>
-                <label><input type="radio" name="q2" value="2" required> a) Alternativa A</label>
-                <label><input type="radio" name="q2" value="1"> b) Alternativa B</label>
-                <label><input type="radio" name="q2" value="0"> c) Alternativa C</label>
-            </div>
-
-            <div class="pergunta">
-                <p>3. Quisque ut augue a enim facilisis iaculis. Fusce sed velit ut nunc pulvinar malesuada. Nullam ut odio eu nisl placerat egestas?</p>
-                <label><input type="radio" name="q3" value="2" required> a) Alternativa A</label>
-                <label><input type="radio" name="q3" value="1"> b) Alternativa B</label>
-                <label><input type="radio" name="q3" value="0"> c) Alternativa C</label>
-            </div>
+            <div id="perguntas"></div>
 
             <button type="submit">Enviar Respostas</button>
-
         </form>
     </div>
 
     <footer>
-        © 2025 Sua Empresa - Todos os direitos reservados.
+        2025 Copyright todos os direitos reservados
     </footer>
+
+    <script>
+                const blocos = {
+            cerebro: {
+                titulo: '🧠 CÉREBRO – Liderança, Direção e Planejamento',
+                perguntas: [
+                    {
+                        texto: '1 - Você sente que está no controle da empresa?',
+                        respostas: [
+                            'Sim, conduzo com clareza e confiança',
+                            'Às vezes sinto controle, às vezes me perco',
+                            'Não, me sinto engolida pela rotina e apagando incêndios'
+                        ]
+                    },
+                    {
+                        texto: '2 - Você planeja sua semana com base em prioridades?',
+                        respostas: [
+                            'Sim, tenho uma rotina clara de planejamento',
+                            'Planejo às vezes, quando sobra tempo',
+                            'Não, resolvo tudo no improviso'
+                        ]
+                    },
+                    {
+                        texto: '3 - Você evita decisões por medo ou insegurança?',
+                        respostas: [
+                            'Não, tomo decisões com firmeza',
+                            'Às vezes adio ou peço ajuda',
+                            'Sim, costumo travar ou fugir de decisões difíceis'
+                        ]
+                    },
+                    {
+                        texto: '4 - Você tem clareza sobre onde quer chegar em 3 anos?',
+                        respostas: [
+                            'Sim, tenho metas e visão clara do futuro',
+                            'Tenho uma ideia, mas não está clara ou organizada',
+                            'Não, estou vivendo um dia de cada vez'
+                        ]
+                    },
+                    {
+                        texto: '5 - Você revisa suas metas com frequência?',
+                        respostas: [
+                            'Sim, acompanho e ajusto regularmente',
+                            'Faço isso esporadicamente',
+                            'Não, deixo isso de lado'
+                        ]
+                    },
+                    {
+                        texto: '6 - Você analisa vendas, custos e desempenho com regularidade?',
+                        respostas: [
+                            'Sim, acompanho os dados toda semana ou mês',
+                            'Às vezes olho, mas sem consistência',
+                            'Não, me baseio em sensação e urgência'
+                        ]
+                    },
+                    {
+                        texto: '7 - Existe um plano estruturado de crescimento?',
+                        respostas: [
+                            'Sim, com metas, prazos e ações definidas',
+                            'Tenho vontade de crescer, mas sem estrutura',
+                            'Não, cresço conforme aparece oportunidade'
+                        ]
+                    },
+                    {
+                        texto: '8 - Sua atuação é mais estratégica do que operacional?',
+                        respostas: [
+                            'Sim, foco na liderança e crescimento',
+                            'Divido entre liderar e operar',
+                            'Não, estou 100% na operação'
+                        ]
+                    },
+                    {
+                        texto: '9 - Você decide com agilidade e confiança?',
+                        respostas: [
+                            'Sim, com firmeza e autonomia',
+                            'Às vezes me sinto insegura ou peço opiniões',
+                            'Não, procrastino decisões importantes'
+                        ]
+                    },
+                    {
+                        texto: '10 - Sua empresa funcionaria bem sem você por 15 dias?',
+                        respostas: [
+                            'Sim, tudo está bem organizado e com responsáveis claros',
+                            'Funcionaria com pequenos ajustes ou suporte',
+                            'Não, tudo depende de mim'
+                        ]
+                    },
+                    {
+                        texto: '11 - Sua empresa monitora regularmente a atuação dos concorrentes e o mercado?',
+                        respostas: [
+                            'Sim, com análises e ações definidas',
+                            'Às vezes, de forma informal',
+                            'Não, não monitora'
+                        ]
+                    },
+                    {
+                        texto: '12 - Existe uma estratégia clara para posicionamento e diferenciação no mercado?',
+                        respostas: [
+                            'Sim, bem definida e aplicada',
+                            'Parcialmente, mas sem consistência',
+                            'Não existe'
+                        ]
+                    },
+                    {
+                        texto: '13 - A empresa possui cultura de inovação e melhoria contínua?',
+                        respostas: [
+                            'Sim, é um valor presente e praticado',
+                            'Às vezes, dependendo do momento',
+                            'Não, resistimos a mudanças'
+                        ]
+                    },
+                    {
+                        texto: '14 - A empresa se adapta rapidamente às mudanças do mercado?',
+                        respostas: [
+                            'Sim, com agilidade e planejamento',
+                            'Às vezes, mas demora para reagir',
+                            'Não, fica estagnada'
+                        ]
+                    }
+                ]
+            },
+            coracao: {
+                titulo: '❤️ CORAÇÃO – Equipe, Clima e Cultura',
+                perguntas: [
+                    {
+                        texto: '15 - Sua equipe está alinhada com seus valores?',
+                        respostas: [
+                            'Sim, todos conhecem e praticam os valores do negócio',
+                            'Alguns sim, outros nem tanto',
+                            'Não, sinto desalinhamento ou falta de conexão'
+                        ]
+                    },
+                    {
+                        texto: '16 - Existe confiança entre você e a equipe?',
+                        respostas: [
+                            'Sim, há abertura, respeito e colaboração',
+                            'Às vezes sim, às vezes percebo distância',
+                            'Não, sinto barreiras, insegurança ou ruídos'
+                        ]
+                    },
+                    {
+                        texto: '17 - Você lida bem com erros e conflitos?',
+                        respostas: [
+                            'Sim, com diálogo e aprendizado',
+                            'Às vezes me desestabilizo ou adio conversas difíceis',
+                            'Não, evito ou reajo mal'
+                        ]
+                    },
+                    {
+                        texto: '18 - Você se sente seguro(a) para repor talentos quando necessário?',
+                        respostas: [
+                            'Sim, tenho opções e plano para isso',
+                            'Depende da situação',
+                            'Não, me sinto travada ou com medo de perder'
+                        ]
+                    },
+                    {
+                        texto: '19 - Você já evitou desligar alguém por insegurança?',
+                        respostas: [
+                            'Não, lido com isso quando necessário',
+                            'Às vezes adio para evitar conflitos',
+                            'Sim, mantenho pessoas mesmo sem resultado'
+                        ]
+                    },
+                    {
+                        texto: '20 - Sua equipe sabe o que se espera dela?',
+                        respostas: [
+                            'Sim, cada um tem clareza de seu papel e entregas',
+                            'Mais ou menos, algumas funções ainda são vagas',
+                            'Não, percebo confusão ou falta de direção'
+                        ]
+                    },
+                    {
+                        texto: 'Existe protagonismo na equipe?',
+                        respostas: [
+                            'Sim, todos se responsabilizam e tomam iniciativa',
+                            'Alguns sim, outros esperam ordens',
+                            'Não, todos dependem de mim'
+                        ]
+                    },
+                    {
+                        texto: 'Sua equipe age com autonomia?',
+                        respostas: [
+                            'Sim, resolvem bem sem depender de mim',
+                            'Em partes, mas ainda me procuram demais',
+                            'Não, tudo passa por mim'
+                        ]
+                    },
+                    {
+                        texto: 'Você conversa sobre desempenho com frequência?',
+                        respostas: [
+                            'Sim, dou feedbacks e acompanho resultados',
+                            'Faço isso às vezes, sem rotina definida',
+                            'Não, evito por falta de tempo ou preparo'
+                        ]
+                    },
+                    {
+                        texto: 'Você se sente reconhecida pela equipe?',
+                        respostas: [
+                            'Sim, sinto valorização e respeito',
+                            'Às vezes, mas gostaria de mais',
+                            'Não, me sinto sozinha e desvalorizada'
+                        ]
+                    },
+                    {
+                        texto: 'Sua empresa promove o desenvolvimento contínuo dos colaboradores?',
+                        respostas: [
+                            'Sim, com treinamentos e oportunidades constantes',
+                            'Algumas ações, mas pouco frequentes',
+                            'Não, não há foco nisso'
+                        ]
+                    },
+                    {
+                        texto: 'Existe um programa ou ação para reconhecer e valorizar os colaboradores?',
+                        respostas: [
+                            'Sim, com frequência e diversidade',
+                            'Às vezes, de forma pontual',
+                            'Não, não valorizamos formalmente'
+                        ]
+                    },
+                    {
+                        texto: 'A empresa possui ações relacionadas à responsabilidade social ou sustentabilidade?',
+                        respostas: [
+                            'Sim, com iniciativas consistentes',
+                            'Pouco, em raras ocasiões',
+                            'Não, não temos essas práticas'
+                        ]
+                    }
+                ]
+            },
+            pulmao: {
+                titulo: '💨 PULMÃO – Finanças, Sustentação e Lucratividade',
+                perguntas: [
+                    {
+                        texto: 'Você sabe o lucro mensal da empresa?',
+                        respostas: [
+                            'Sim, com clareza e controle',
+                            'Tenho uma noção, mas sem precisão',
+                            'Não faço ideia'
+                        ]
+                    },
+                    {
+                        texto: 'O financeiro da empresa não afeta sua vida pessoal?',
+                        respostas: [
+                            'São totalmente separados',
+                            'Às vezes se misturam',
+                            'Afeta diretamente minha vida pessoal'
+                        ]
+                    },
+                    {
+                        texto: 'O faturamento é proporcional ao esforço da equipe?',
+                        respostas: [
+                            'Sim, vejo retorno justo',
+                            'Em partes, poderia ser melhor',
+                            'Não, trabalhamos muito e ganhamos pouco'
+                        ]
+                    },
+                    {
+                        texto: 'Você consegue investir sem medo de faltar dinheiro?',
+                        respostas: [
+                            'Sim, com planejamento',
+                            'Faço com cautela e receio',
+                            'Não, deixo de inovar por medo'
+                        ]
+                    },
+                    {
+                        texto: 'Os pagamentos estão sempre em dia?',
+                        respostas: [
+                            'Sim, tudo sob controle',
+                            'Às vezes atrasam',
+                            'Não, sempre há atrasos ou imprevistos'
+                        ]
+                    },
+                    {
+                        texto: 'Você separa gastos pessoais dos da empresa?',
+                        respostas: [
+                            'Sim, com disciplina',
+                            'Às vezes misturo',
+                            'Não, uso tudo junto'
+                        ]
+                    },
+                    {
+                        texto: 'Seus preços são definidos com base em cálculo e estratégia?',
+                        respostas: [
+                            'Sim, com base real de custos e mercado',
+                            'Mais ou menos, com base na concorrência',
+                            'Não, no “achismo” ou por comparação'
+                        ]
+                    },
+                    {
+                        texto: 'Você faz retiradas fixas da empresa?',
+                        respostas: [
+                            'Sim, tenho um pró-labore definido',
+                            'Retiro conforme sobra',
+                            'Não faço retirada certa'
+                        ]
+                    },
+                    {
+                        texto: 'Você paga fornecedores e equipe com tranquilidade?',
+                        respostas: [
+                            'Sim, sempre',
+                            'Às vezes fico no limite',
+                            'Não, já atrasei ou deixei de pagar'
+                        ]
+                    },
+                    {
+                        texto: 'Você se sente financeiramente segura com o futuro da empresa?',
+                        respostas: [
+                            'Sim, com reservas e previsibilidade',
+                            'Tenho dúvidas e receios',
+                            'Não, me sinto vulnerável'
+                        ]
+                    },
+                    {
+                        texto: 'Sua empresa possui controle e plano para gestão de riscos financeiros?',
+                        respostas: [
+                            'Sim, com ferramentas e ações definidas',
+                            'Parcialmente, mas pouco estruturado',
+                            'Não, não existe controle formal'
+                        ]
+                    },
+                    {
+                        texto: 'Vocês têm políticas claras para compliance e governança financeira?',
+                        respostas: [
+                            'Sim, seguidas rigorosamente',
+                            'Pouco definidas, mas tentamos seguir',
+                            'Não, não temos políticas formais'
+                        ]
+                    }
+                ]
+            },
+            sangue: {
+                titulo: '🩸 SANGUE – Processos, Comunicação e Sistema',
+                perguntas: [
+                    {
+                        texto: 'A experiência do cliente é padronizada?',
+                        respostas: [
+                            'Sim, independente de quem atende',
+                            'Em parte, varia entre os atendentes',
+                            'Não, cada um faz de um jeito'
+                        ]
+                    },
+                    {
+                        texto: 'A equipe segue processos claros?',
+                        respostas: [
+                            'Sim, temos padrão definido',
+                            'Às vezes, com falhas',
+                            'Não, cada um faz do seu jeito'
+                        ]
+                    },
+                    {
+                        texto: 'Existem registros de estoque e atendimentos?',
+                        respostas: [
+                            'Sim, tudo controlado',
+                            'Algumas coisas sim, outras não',
+                            'Não, nada é registrado'
+                        ]
+                    },
+                    {
+                        texto: 'A comunicação entre setores é fluida?',
+                        respostas: [
+                            'Sim, clara e objetiva',
+                            'Às vezes há ruídos',
+                            'Não, gera retrabalho e confusão'
+                        ]
+                    },
+                    {
+                        texto: 'Sua equipe sabe quais são as metas e objetivos da empresa?',
+                        respostas: [
+                            'Sim, todos têm clareza e são lembrados com frequência',
+                            'Sabem superficialmente ou às vezes esquecem',
+                            'Não, metas não são comunicadas'
+                        ]
+                    },
+                    {
+                        texto: 'Você lida bem com imprevistos e urgências?',
+                        respostas: [
+                            'Sim, consigo manter o controle',
+                            'Às vezes perco o foco',
+                            'Não, tudo vira caos'
+                        ]
+                    },
+                    {
+                        texto: 'Você consegue delegar com segurança?',
+                        respostas: [
+                            'Sim, com tranquilidade',
+                            'Só algumas tarefas',
+                            'Não consigo confiar'
+                        ]
+                    },
+                    {
+                        texto: 'A organização evita perda de clientes?',
+                        respostas: [
+                            'Sim, temos controle e cuidado',
+                            'Às vezes cometemos falhas',
+                            'Não, já perdemos por desorganização'
+                        ]
+                    },
+                    {
+                        texto: 'A agenda é bem controlada?',
+                        respostas: [
+                            'Sim, sem falhas',
+                            'Às vezes há furos ou atrasos',
+                            'Não, é desorganizada'
+                        ]
+                    },
+                    {
+                        texto: 'Você usa ferramentas digitais na gestão?',
+                        respostas: [
+                            'Sim, uso sistemas e controles',
+                            'Uso parcialmente',
+                            'Não, faço tudo manual'
+                        ]
+                    },
+                    {
+                        texto: 'A empresa utiliza tecnologias digitais para automatizar processos além da gestão financeira?',
+                        respostas: [
+                            'Sim, diversas ferramentas em uso',
+                            'Algumas, mas pouco integradas',
+                            'Não, tudo manual ou pouco tecnológico'
+                        ]
+                    },
+                    {
+                        texto: 'Existe um sistema para medir a satisfação e fidelidade dos clientes?',
+                        respostas: [
+                            'Sim, com pesquisas regulares e análise',
+                            'Às vezes, mas pouco estruturado',
+                            'Não, não medimos'
+                        ]
+                    },
+                    {
+                        texto: 'A empresa possui planos e controles para minimizar riscos jurídicos e operacionais?',
+                        respostas: [
+                            'Sim, com políticas e acompanhamento',
+                            'Parcialmente, mas pouco formalizados',
+                            'Não, não há controle'
+                        ]
+                    }
+                ]
+            }
+        };
+
+        let divPerguntas = document.getElementById("perguntas");
+        let contador = 1;
+
+        for (const bloco in blocos) {
+            const secao = blocos[bloco];
+
+            const titulo = document.createElement("h3");
+            titulo.className = "bloco-titulo";
+            titulo.textContent = secao.titulo;
+            divPerguntas.appendChild(titulo);
+
+            secao.perguntas.forEach((obj, index) => {
+                const div = document.createElement("div");
+                div.className = "pergunta";
+
+                let respostasHTML = obj.respostas.map((resp, i) => {
+                    const value = 2 - i; // valor 2, 1, 0
+                    const requiredAttr = i === 0 ? "required" : "";
+                    return `<label><input type="radio" name="q${contador}" value="${value}" ${requiredAttr}> ${resp}</label>`;
+                }).join("");
+
+                div.innerHTML = `
+                    <p>${obj.texto}</p>
+                    ${respostasHTML}
+                `;
+
+                divPerguntas.appendChild(div);
+                contador++;
+            });
+        }
+    </script>
 
 </body>
 </html>
