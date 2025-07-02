@@ -1,0 +1,234 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #FDFDFB;
+  color: #1C3553;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-size: 16px;
+  padding: 0;
+}
+
+.topo {
+  background-color: #1a1a1a;
+  padding: 10px 0;
+}
+
+.topo .container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 150px;
+}
+
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+  flex: 1;
+}
+
+h2, h3, p, label {
+  color: #212121;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+h3.bloco-titulo {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.pergunta {
+  margin-bottom: 40px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.pergunta p {
+  font-weight: bold;
+}
+
+label {
+  display: block;
+  margin-top: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+input[type="text"],
+input[type="tel"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background-color: #EADCA6;
+  color: #1C3553;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+button:hover {
+  background-color: #d8c78c;
+}
+
+button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 50px;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-20deg);
+  animation: shine 2.5s linear infinite;
+}
+
+@keyframes shine {
+  from { left: 100%; }
+  to { left: -50px; }
+}
+
+footer {
+  background-color: #EADCA6;
+  text-align: center;
+  padding: 15px;
+  font-size: 14px;
+  color: #1C3553;
+}
+
+/* Caixa Diagnóstico */
+.box-diagnostico {
+  position: relative;
+  padding: 25px;
+  background-color: #1f1f1f;
+  color: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 40px 0;
+  z-index: 1;
+}
+
+.box-diagnostico .conteudo-box {
+  position: relative;
+  z-index: 2;
+}
+
+.box-diagnostico ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 10px;
+}
+
+.box-diagnostico li {
+  margin: 5px 0;
+  font-weight: bold;
+}
+
+/* Animação borda dourada */
+.borda-animada {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.borda-animada::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  box-sizing: border-box;
+  border: 2px solid transparent;
+  background: 
+    linear-gradient(#000, #000) padding-box, 
+    linear-gradient(90deg, transparent 0%, #FFD700 50%, transparent 100%) border-box;
+  mask: 
+    linear-gradient(#fff 0 0) padding-box, 
+    linear-gradient(#fff 0 0) border-box;
+  mask-composite: exclude;
+  animation: borderAnimation 2s linear infinite;
+}
+
+@keyframes borderAnimation {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 400% 0%; }
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .logo img {
+    height: 100px;
+  }
+
+  .topo .container,
+  .container {
+    padding: 0 10px;
+    margin: 20px auto;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 20px;
+    text-align: left;
+  }
+
+  h3.bloco-titulo {
+    font-size: 18px;
+    text-align: left;
+  }
+
+  .pergunta {
+    padding: 15px;
+  }
+
+  label {
+    font-size: 15px;
+  }
+
+  button {
+    font-size: 16px;
+  }
+
+  footer {
+    font-size: 13px;
+    padding: 10px;
+  }
+}
