@@ -18,7 +18,7 @@ function enviarEmailDiagnostico($nome, $whatsapp, $relatorio) {
         // Remetente e destinatário (você mesmo)
         $mail->setFrom($_ENV['email'], 'Check-up Empresarial');
         //$mail->addAddress($_ENV['email']); // Você mesmo como destinatário
-        $mail->addAddress('admin@koetemp.com'); // Você mesmo como destinatário
+        $mail->addAddress($_ENV['email_que_vai_receber']); // Você mesmo como destinatário
 
         $mail->isHTML(true);
         $mail->Subject = 'Resultado do Check-up Empresarial';
