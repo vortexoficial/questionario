@@ -1,7 +1,5 @@
 <?php
-function mostrarResultado($nome, $relatorio) {
-    include 'css/processa.css'; // opcional: embutir CSS se quiser
-    ?>
+function mostrarResultado($nome, $relatorio) {?>
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
