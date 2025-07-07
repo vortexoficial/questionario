@@ -117,7 +117,7 @@ const blocos = {
                 ]
             },
             coracao: {
-                titulo: '❤️ CORAÇÃO – Equipe, Clima e Cultura',
+                titulo: '🫀 CORAÇÃO – Equipe, Clima e Cultura',
                 perguntas: [
                     {
                         texto: '15 - Sua equipe está alinhada com seus valores?',
@@ -226,7 +226,7 @@ const blocos = {
                 ]
             },
             pulmao: {
-                titulo: '💨 PULMÃO – Finanças, Sustentação e Lucratividade',
+                titulo: '🫁 PULMÃO – Finanças, Sustentação e Lucratividade',
                 perguntas: [
                     {
                         texto: '28 - Você sabe o lucro mensal da empresa?',
