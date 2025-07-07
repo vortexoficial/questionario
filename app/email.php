@@ -34,7 +34,18 @@ function enviarEmailDiagnostico($nome, $whatsapp, $relatorio) {
             $html .= "{$dados['icone']} <strong>$orgao:</strong> {$dados['pontos']} pontos – {$dados['status']}<br>";
         }
 
-        $html .= "<br><b>Total Geral:</b> {$relatorio['total']} pontos<br><br>{$relatorio['frase']}";
+    $html .= "<br><b>Total Geral:</b> {$relatorio['total']} pontos<br><br>{$relatorio['frase']}";
+
+// Adiciona as respostas do questionário
+$html .= "<br><br><b>Respostas do Questionário:</b><br>";
+
+foreach ($_POST as $key => $value) {
+    if (strpos($key, 'pergunta_') === 0) {
+        $perguntaFormatada = ucfirst(str_replace('_', ' ', $key));
+        $html .= "<strong>$perguntaFormatada:</strong> $value<br>";
+    }
+}
+
 
         $mail->Body = $html;
 
