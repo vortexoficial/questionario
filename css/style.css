@@ -3,6 +3,57 @@
 *::after {
   box-sizing: border-box;
 }
+/* Garanta que o corpo da página ocupe toda a altura da tela */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #FDFDFB;
+  color: #1C3553;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-size: 16px;
+  box-sizing: border-box;  /* Garantir que padding e margin não alterem o layout */
+}
+
+/* Ajustando os containers para preencher a largura completa */
+.container {
+  max-width: 100%;  /* Garantir que o contêiner ocupe a largura total */
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* Alinhando as perguntas à esquerda */
+.pergunta {
+  text-align: left;
+  margin-bottom: 15px;
+  font-size: 18px; /* Ajuste o tamanho conforme necessário */
+}
+
+/* Ajuste para o layout em dispositivos móveis */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 15px;
+  }
+
+  .topo .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Ajustando as fontes para telas pequenas */
+  body {
+    font-size: 14px;
+  }
+
+  /* Ajustando o tamanho das imagens e outros elementos responsivos */
+  .logo img {
+    height: 120px;
+  }
+}
+
 
 body {
   font-family: Arial, sans-serif;
