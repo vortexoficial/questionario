@@ -3,19 +3,8 @@
 *::after {
   box-sizing: border-box;
 }
-/* Garanta que o corpo da página ocupe toda a altura da tela */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #FDFDFB;
-  color: #1C3553;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  font-size: 16px;
-  box-sizing: border-box;  /* Garantir que padding e margin não alterem o layout */
-}
+
+
 
 /* Ajustando os containers para preencher a largura completa */
 .container {
